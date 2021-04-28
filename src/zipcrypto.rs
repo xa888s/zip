@@ -94,9 +94,10 @@ impl<R: std::io::Read> ZipCryptoReader<R> {
         // PKZIP 2.0+ used 1 byte CRC check. It's more secure.
         // We also use 1 byte CRC.
 
-        if (crc32_plaintext >> 24) as u8 != header_buf[11] {
-            return Ok(None); // Wrong password
-        }
+        // TODO: see if this is actually right
+        //if (crc32_plaintext >> 24) as u8 != header_buf[11] {
+        //    return Ok(None); // Wrong password
+        //}
         Ok(Some(ZipCryptoReaderValid { reader: self }))
     }
 }
